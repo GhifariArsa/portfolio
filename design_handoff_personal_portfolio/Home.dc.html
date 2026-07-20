@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #282c34; }
+    @keyframes vim-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  </style>
+</helmet>
+
+<div style="width:100vw;height:100vh;background:#282c34;color:#abb2bf;font-family:'JetBrains Mono',monospace;display:flex;flex-direction:column;overflow:hidden;">
+
+  <!-- titlebar -->
+  <div style="height:36px;flex-shrink:0;background:#21252b;border-bottom:1px solid #181a1f;display:flex;align-items:center;padding:0 12px;gap:16px;">
+    <div style="display:flex;gap:8px;">
+      <div style="width:12px;height:12px;border-radius:50%;background:#e06c75;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#e5c07b;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#98c379;"></div>
+    </div>
+    <div style="flex:1;text-align:center;font-size:13px;color:#5c6370;">ghifari@portfolio: ~/site</div>
+    <div style="width:52px;"></div>
+  </div>
+
+  <!-- tab bar -->
+  <div style="height:36px;flex-shrink:0;background:#21252b;border-bottom:1px solid #181a1f;display:flex;overflow-x:auto;">
+    <a href="Home.dc.html" style="display:flex;align-items:center;padding:0 20px;font-size:13px;text-decoration:none;background:#282c34;color:#abb2bf;border-top:2px solid #61afef;border-right:1px solid #181a1f;">about.md</a>
+    <a href="Experience.dc.html" style="display:flex;align-items:center;padding:0 20px;font-size:13px;text-decoration:none;background:#21252b;color:#5c6370;border-top:2px solid transparent;border-right:1px solid #181a1f;">experience.json</a>
+    <a href="Projects.dc.html" style="display:flex;align-items:center;padding:0 20px;font-size:13px;text-decoration:none;background:#21252b;color:#5c6370;border-top:2px solid transparent;border-right:1px solid #181a1f;">projects/</a>
+    <a href="Blog.dc.html" style="display:flex;align-items:center;padding:0 20px;font-size:13px;text-decoration:none;background:#21252b;color:#5c6370;border-top:2px solid transparent;border-right:1px solid #181a1f;">blog/</a>
+  </div>
+
+  <!-- body -->
+  <div style="flex:1;display:flex;overflow:hidden;">
+
+    <!-- sidebar -->
+    <div style="width:230px;flex-shrink:0;background:#21252b;border-right:1px solid #181a1f;padding:14px 0;overflow-y:auto;font-size:13.5px;">
+      <div style="padding:0 14px 10px;color:#5c6370;font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;">~/ghifari-arsa-ranandya</div>
+      <sc-for list="{{ sidebarItems }}" as="it" hint-placeholder-count="6">
+        <a href="{{ it.href }}" download="{{ it.download }}" ref="{{ it.refFn }}" style="{{ it.style }}">
+          <span style="opacity:.7;width:12px;display:inline-block;">{{ it.glyph }}</span>{{ it.label }}
+        </a>
+      </sc-for>
+    </div>
+
+    <!-- main content -->
+    <div style="flex:1;overflow-y:auto;">
+      <div style="display:flex;min-height:100%;">
+        <!-- gutter -->
+        <div style="width:44px;flex-shrink:0;padding:28px 0 0;text-align:right;">
+          <div style="color:#495162;font-size:13px;line-height:1.9;padding-right:14px;border-right:1px solid #2c313c;">
+            <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div><div>32</div><div>33</div><div>34</div><div>35</div>
+          </div>
+        </div>
+
+        <!-- content -->
+        <div style="flex:1;padding:28px 40px 60px;max-width:720px;line-height:1.9;">
+
+          <div style="font-size:34px;font-weight:700;color:#e5c07b;margin-bottom:2px;"># Ghifari Arsa Ranandya</div>
+          <div style="font-size:16px;color:#5c6370;font-style:italic;margin-bottom:24px;">&gt; Software Engineer</div>
+
+          <div style="font-size:15px;color:#abb2bf;margin-bottom:8px;">## About</div>
+          <p style="font-size:15px;color:#b6bdc8;max-width:600px;margin:0 0 24px;">
+            I build things for the web and occasionally forget to <span style="color:#98c379;">git commit</span>.
+            Currently obsessed with fast interfaces, developer tooling, and the space bar on my keyboard.
+            This site is navigable with vim motions &mdash; try <span style="color:#61afef;">j</span> / <span style="color:#61afef;">k</span> to move and <span style="color:#61afef;">Enter</span> to open.
+          </p>
+
+          <div style="font-size:15px;color:#abb2bf;margin-bottom:10px;">## Stack</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;">
+            <span style="background:#2c313c;color:#56b6c2;font-size:13px;padding:4px 10px;border-radius:4px;">TypeScript</span>
+            <span style="background:#2c313c;color:#56b6c2;font-size:13px;padding:4px 10px;border-radius:4px;">React</span>
+            <span style="background:#2c313c;color:#56b6c2;font-size:13px;padding:4px 10px;border-radius:4px;">Node.js</span>
+            <span style="background:#2c313c;color:#56b6c2;font-size:13px;padding:4px 10px;border-radius:4px;">Python</span>
+            <span style="background:#2c313c;color:#56b6c2;font-size:13px;padding:4px 10px;border-radius:4px;">PostgreSQL</span>
+            <span style="background:#2c313c;color:#56b6c2;font-size:13px;padding:4px 10px;border-radius:4px;">Docker</span>
+            <span style="background:#2c313c;color:#56b6c2;font-size:13px;padding:4px 10px;border-radius:4px;">AWS</span>
+            <span style="background:#2c313c;color:#56b6c2;font-size:13px;padding:4px 10px;border-radius:4px;">Git</span>
+          </div>
+
+          <div id="contact" style="font-size:15px;color:#abb2bf;margin-bottom:10px;">## Contact</div>
+          <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:28px;">
+            <sc-for list="{{ contactItems }}" as="it" hint-placeholder-count="4">
+              <a href="{{ it.href }}" download="{{ it.download }}" ref="{{ it.refFn }}" target="{{ it.target }}" style="{{ it.style }}">
+                <span style="color:#98c379;">$</span> <span style="color:#5c6370;">{{ it.cmd }}</span> {{ it.label }}
+              </a>
+            </sc-for>
+          </div>
+
+          <div style="font-size:15px;color:#abb2bf;margin-bottom:10px;">## Resume</div>
+          <div style="color:#5c6370;font-size:13px;margin-bottom:6px;">// press Enter on the line below to download</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- status bar -->
+  <div style="height:26px;flex-shrink:0;display:flex;align-items:stretch;font-size:12px;">
+    <div style="background:#98c379;color:#282c34;font-weight:700;display:flex;align-items:center;padding:0 12px;">NORMAL</div>
+    <div style="background:#3a3f4b;color:#abb2bf;display:flex;align-items:center;padding:0 12px;">⎇ main</div>
+    <div style="background:#2c313c;color:#5c6370;display:flex;align-items:center;padding:0 12px;">about.md</div>
+    <div style="flex:1;background:#282c34;"></div>
+    <div style="background:#2c313c;color:#5c6370;display:flex;align-items:center;padding:0 12px;">UTF-8</div>
+    <div style="background:#3a3f4b;color:#abb2bf;display:flex;align-items:center;padding:0 14px;">{{ clockText }}</div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const SIDEBAR_CONFIG = [
+  { kind: 'file', glyph: '≡', label: 'about.md', href: 'Home.dc.html', color: '#e5c07b' },
+  { kind: 'file', glyph: '{}', label: 'experience.json', href: 'Experience.dc.html', color: '#98c379' },
+  { kind: 'folder', glyph: '▸', label: 'projects/', href: 'Projects.dc.html', color: '#61afef' },
+  { kind: 'folder', glyph: '▸', label: 'blog/', href: 'Blog.dc.html', color: '#61afef' },
+  { kind: 'file', glyph: '$', label: 'contact.sh', href: 'Home.dc.html#contact', color: '#e06c75' },
+  { kind: 'file', glyph: '⇩', label: 'Ghifari-CV.pdf', href: 'assets/Ghifari-Arsa-Ranandya-CV.pdf', color: '#c678dd', download: true },
+];
+
+const CONTACT_CONFIG = [
+  { cmd: 'open', label: 'github.com/ghifariarsa', href: 'https://github.com/ghifariarsa', target: '_blank' },
+  { cmd: 'open', label: 'linkedin.com/in/ghifariarsa', href: 'https://linkedin.com/in/ghifariarsa', target: '_blank' },
+  { cmd: 'mail', label: 'ghifari@ghifari.dev', href: 'mailto:ghifari@ghifari.dev' },
+  { cmd: 'wget', label: 'Ghifari-Arsa-Ranandya-CV.pdf', href: 'assets/Ghifari-Arsa-Ranandya-CV.pdf', download: true },
+];
+
+function fmtClock() {
+  const d = new Date();
+  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' · ' +
+    d.toLocaleDateString([], { month: 'short', day: 'numeric' });
+}
+
+class Component extends DCLogic {
+  state = { focusIndex: 0, clockText: fmtClock() };
+
+  constructor(props) {
+    super(props);
+    this.itemRefs = [];
+    this.items = [
+      ...SIDEBAR_CONFIG.map(c => ({ ...c, section: 'sidebar' })),
+      ...CONTACT_CONFIG.map(c => ({ ...c, section: 'content' })),
+    ];
+  }
+
+  componentDidMount() {
+    this._vimNav = new VimNavLocal({
+      count: () => this.items.length,
+      onMove: (i) => this.setState({ focusIndex: i }),
+      onActivate: (i) => { const el = this.itemRefs[i]; if (el) el.click(); },
+    });
+    this._onKey = (e) => this._vimNav.handleKey(e, this.state.focusIndex);
+    window.addEventListener('keydown', this._onKey);
+    this._clockTimer = setInterval(() => this.setState({ clockText: fmtClock() }), 15000);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._onKey);
+    clearInterval(this._clockTimer);
+  }
+
+  sidebarStyle(color, focused) {
+    return focused
+      ? { display: 'flex', alignItems: 'center', gap: 6, padding: '5px 14px', cursor: 'pointer', textDecoration: 'none', background: color, color: '#282c34', fontWeight: 600 }
+      : { display: 'flex', alignItems: 'center', gap: 6, padding: '5px 14px', cursor: 'pointer', textDecoration: 'none', background: 'transparent', color };
+  }
+
+  contentStyle(focused) {
+    return {
+      display: 'block', textDecoration: 'none', color: '#b6bdc8', fontSize: 14.5,
+      padding: '2px 6px', margin: '0 -6px', borderRadius: 3,
+      background: focused ? 'rgba(97,175,239,0.14)' : 'transparent',
+      boxShadow: focused ? 'inset 0 0 0 1px #61afef' : 'none',
+    };
+  }
+
+  renderVals() {
+    const withIndex = this.items.map((it, i) => ({ ...it, i }));
+    const sidebarItems = withIndex.filter(it => it.section === 'sidebar').map(it => ({
+      ...it,
+      style: this.sidebarStyle(it.color, it.i === this.state.focusIndex),
+      refFn: (el) => { this.itemRefs[it.i] = el; },
+    }));
+    const contactItems = withIndex.filter(it => it.section === 'content').map(it => ({
+      ...it,
+      style: this.contentStyle(it.i === this.state.focusIndex),
+      refFn: (el) => { this.itemRefs[it.i] = el; },
+    }));
+    return { sidebarItems, contactItems, clockText: this.state.clockText };
+  }
+}
+
+class VimNavLocal {
+  constructor({ count, onMove, onActivate }) {
+    this.count = count; this.onMove = onMove; this.onActivate = onActivate; this._lastG = 0;
+  }
+  handleKey(e, currentIndex) {
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    const n = this.count();
+    if (n <= 0) return;
+    switch (e.key) {
+      case 'j': case 'ArrowDown': e.preventDefault(); this.onMove(Math.min(currentIndex + 1, n - 1)); break;
+      case 'k': case 'ArrowUp': e.preventDefault(); this.onMove(Math.max(currentIndex - 1, 0)); break;
+      case 'G': e.preventDefault(); this.onMove(n - 1); break;
+      case 'g': {
+        const now = Date.now();
+        if (now - this._lastG < 500) { e.preventDefault(); this.onMove(0); this._lastG = 0; }
+        else { this._lastG = now; }
+        break;
+      }
+      case 'Enter': case 'l': e.preventDefault(); this.onActivate(currentIndex); break;
+      default: break;
+    }
+  }
+}
+</script>
+</body>
+</html>
