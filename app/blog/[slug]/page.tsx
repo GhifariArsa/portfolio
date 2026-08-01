@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { c } from '@/lib/theme';
 import { POSTS, getPost } from '@/lib/content';
 import { Content } from '@/components/ui';
@@ -15,7 +16,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
-  return { title: `${post.title} — Ghifari Arsa Ranandya` };
+  return { title: post ? `${post.title} — Ghifari Arsa Ranandya` : 'Not found' };
 }
 
 export default async function BlogPostPage({
@@ -25,6 +26,8 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
   const post = getPost(slug);
+
+  if (!post) notFound();
 
   return (
     <Content maxWidth={700}>

@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { c, focusRing } from "@/lib/theme";
-import { CONTACT, STACK, type ContactRow } from "@/lib/content";
+import { CONTACT, EDUCATION, STACK, type ContactRow } from "@/lib/content";
 import { GutteredPage } from "@/components/ui";
 import { useVimContent, useVimItem } from "@/components/vim";
 
@@ -35,7 +35,7 @@ export default function HomePage() {
           marginBottom: 24,
         }}
       >
-        &gt; Software Engineer | AI Researcher
+        &gt; AI Engineer &amp; Researcher | Software Engineer
       </div>
 
       <div style={{ ...heading, marginBottom: 8 }}>## About</div>
@@ -47,11 +47,15 @@ export default function HomePage() {
           margin: "0 0 24px",
         }}
       >
-        I&apos;m a software engineer and currently a master&apos;s student at{" "}
-        <span style={{ color: c.green }}>Monash</span>, doing research in{" "}
-        <span style={{ color: c.green }}>AI</span>. I like building fast
-        interfaces, developer tooling, and things that make everyday work a
-        little less tedious. This site is navigable with vim motions —{" "}
+        I&apos;m an AI engineer and researcher pursuing a Master&apos;s in{" "}
+        <span style={{ color: c.green }}>Artificial Intelligence</span> at{" "}
+        <span style={{ color: c.green }}>Monash</span> (research pathway), after
+        a CS degree at RMIT. I build{" "}
+        <span style={{ color: c.green }}>RAG</span> and{" "}
+        <span style={{ color: c.green }}>LLM</span> systems, from medical AI
+        platforms to self-hosted inference, and I like fast interfaces and
+        developer tooling that make everyday work a little less tedious. This
+        site is navigable with vim motions:{" "}
         <span style={{ color: c.blue }}>j</span> /{" "}
         <span style={{ color: c.blue }}>k</span> to move,{" "}
         <span style={{ color: c.blue }}>Ctrl-l</span> /{" "}
@@ -60,6 +64,45 @@ export default function HomePage() {
         <span style={{ color: c.blue }}>Shift-H</span> to switch tabs, and{" "}
         <span style={{ color: c.blue }}>Enter</span> to open.
       </p>
+
+      <div style={heading}>## Education</div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 14,
+          marginBottom: 28,
+        }}
+      >
+        {EDUCATION.map((edu) => (
+          <div key={edu.school}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
+                gap: 12,
+              }}
+            >
+              <span style={{ fontSize: 15, color: c.blue, fontWeight: 700 }}>
+                {edu.school}
+              </span>
+              <span
+                style={{ fontSize: 12.5, color: c.muted, flexShrink: 0 }}
+              >
+                {edu.dates}
+              </span>
+            </div>
+            <div style={{ fontSize: 14, color: c.body }}>{edu.degree}</div>
+            <div style={{ fontSize: 12.5, color: c.muted }}>{edu.detail}</div>
+            {edu.note && (
+              <div style={{ fontSize: 12.5, color: c.green, marginTop: 2 }}>
+                {edu.note}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
 
       <div style={heading}>## Stack</div>
       <div

@@ -11,9 +11,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Ghifari Arsa Ranandya — Software Engineer',
+  title: 'Ghifari Arsa Ranandya — AI Engineer & Researcher',
   description:
-    'Personal portfolio of Ghifari Arsa Ranandya, a software engineer. Navigable with vim motions.',
+    'Personal portfolio of Ghifari Arsa Ranandya, an AI engineer and researcher building RAG and LLM systems. Navigable with vim motions.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

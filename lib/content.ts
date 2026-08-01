@@ -44,15 +44,49 @@ export const TABS: Tab[] = [
 
 // ---- Home -------------------------------------------------------------------
 
+export interface Education {
+  school: string;
+  detail: string;
+  degree: string;
+  dates: string;
+  note?: string;
+}
+
+export const EDUCATION: Education[] = [
+  {
+    school: 'Monash University',
+    detail: 'Melbourne, VIC',
+    degree: "Master's in Artificial Intelligence (Research Pathway)",
+    dates: 'Expected Jul 2027',
+    note: 'GPA 4.0 / 4.0',
+  },
+  {
+    school: 'Stanford University',
+    detail: 'Stanford, CA · Visiting Summer Student',
+    degree: 'Machine Learning and Symbolic Systems',
+    dates: 'Aug 2026',
+  },
+  {
+    school: 'RMIT University',
+    detail: 'Melbourne, VIC',
+    degree: "Bachelor's of Computer Science",
+    dates: 'Dec 2024',
+    note: 'Graduated with Distinction',
+  },
+];
+
 export const STACK = [
+  'Python',
   'TypeScript',
   'React',
-  'Node.js',
-  'Python',
+  'Next.js',
+  'FastAPI',
   'PostgreSQL',
+  'vLLM',
+  'LlamaIndex',
+  'Neo4j',
   'Docker',
   'AWS',
-  'Git',
 ];
 
 export interface ContactRow {
@@ -64,9 +98,9 @@ export interface ContactRow {
 }
 
 export const CONTACT: ContactRow[] = [
-  { cmd: 'open', label: 'github.com/ghifariarsa', href: 'https://github.com/ghifariarsa', external: true },
-  { cmd: 'open', label: 'linkedin.com/in/ghifariarsa', href: 'https://linkedin.com/in/ghifariarsa', external: true },
-  { cmd: 'mail', label: 'ghifari@ghifari.dev', href: 'mailto:ghifari@ghifari.dev' },
+  { cmd: 'open', label: 'github.com/GhifariArsa', href: 'https://github.com/GhifariArsa', external: true },
+  { cmd: 'mail', label: 'ghifariarsa1403@gmail.com', href: 'mailto:ghifariarsa1403@gmail.com' },
+  { cmd: 'echo', label: 'Melbourne, VIC — Australia', href: '#contact' },
   { cmd: 'wget', label: 'Ghifari-Arsa-Ranandya-CV.pdf', href: '/Ghifari-Arsa-Ranandya-CV.pdf', download: true },
 ];
 
@@ -81,32 +115,51 @@ export interface Job {
 
 export const JOBS: Job[] = [
   {
-    role: 'Senior Software Engineer',
-    company: 'Placeholder Labs',
-    dates: '2023 — Present',
+    role: 'AI Engineer / Researcher',
+    company: 'Cao Lab for Medical AGI/ASI',
+    dates: 'Feb 2026 — Present',
     bullets: [
-      'Led rewrite of the core dashboard, cutting load time by 40%.',
-      'Mentored two junior engineers through their first on-call rotations.',
-      'Shipped an internal CLI that the whole team now depends on daily.',
+      'Architected and built a modular, API-based Retrieval-Augmented Generation (RAG) service adopted across multiple research and product initiatives within the lab.',
+      'Evaluated and benchmarked RAG strategies — retrieval pipelines, chunking, embedding models, reranking, and hybrid search — to optimise factual accuracy, latency, and domain grounding.',
+      'Designed an AI-powered learning platform for Monash postgraduate medical students, using knowledge graphs and RAG to accelerate mastery and personalised study.',
     ],
   },
   {
-    role: 'Software Engineer',
-    company: 'Example Systems',
-    dates: '2021 — 2023',
+    role: 'AI Engineer / Team Lead',
+    company: 'Monash Deep Neuron',
+    dates: 'Sep 2025 — Present',
     bullets: [
-      'Built and maintained a payments service handling 10k+ req/min.',
-      'Introduced end-to-end tests, reducing regressions by half.',
-      'Partnered with design to ship a fully accessible component library.',
+      'Developing a reinforcement learning agent for autonomous laparoscopic surgery (appendix and gallbladder removal), expanding toward other procedures and robotic systems.',
+      'Deploying and serving self-hosted large language models with vLLM for efficient inference and experimentation.',
+      'Experimenting with Vision-Language-Action (VLA) and multimodal LLMs for surgical reasoning, perception, and decision-making.',
     ],
   },
   {
-    role: 'Software Engineer Intern',
-    company: 'Sample Co',
-    dates: 'Summer 2020',
+    role: 'Full-Stack Developer',
+    company: 'AssistX Enterprise',
+    dates: 'Dec 2024 — Nov 2025',
     bullets: [
-      'Prototyped a data pipeline later adopted into production.',
-      'Presented findings to the eng org at the summer demo day.',
+      'Led development of AssistX Copilot, a file management system that simplifies RAG workflows for end users — Python backend for file processing and user management, Next.js frontend.',
+      'Built a Python queuing API with CuPy and FastAPI for GPU parallel processing, cutting file-processing wait times from 2–3 minutes to near zero.',
+      'Delivered a custom AI workflow in 3 weeks for a provincial council, enabling natural-language querying of a large digital archive for non-technical users.',
+    ],
+  },
+  {
+    role: 'Software Developer Intern',
+    company: 'Reyts Fintech',
+    dates: 'Jun 2024 — Nov 2024',
+    bullets: [
+      'Revamped the entire admin dashboard for a P2P currency-exchange platform using Vue.js, focusing on usability and functionality.',
+      'Collaborated with the team to keep the codebase high-quality and maintainable; founders praised the improved dashboard.',
+    ],
+  },
+  {
+    role: 'Software Developer Intern',
+    company: 'PT Kreasi Sentra Solusindo',
+    dates: 'Jul 2021 — Dec 2021',
+    bullets: [
+      'Implemented a fully automated invoicing system for factory operations, eliminating manual invoicing and improving speed and accuracy.',
+      'Designed financial reports with Jaspersoft Studio and wrote an algorithm to convert numeric values into Indonesian words for invoicing.',
     ],
   },
 ];
@@ -122,28 +175,28 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    name: 'lazyfetch',
-    description: 'A tiny data-fetching layer with built-in caching and retries for React apps.',
-    tags: ['TypeScript', 'React'],
-    href: 'https://github.com/ghifariarsa',
+    name: 'bloomed',
+    description: 'Adaptive learning tool for medical students that pinpoints where their diagnostic reasoning went wrong and helps them study faster.',
+    tags: ['AI', 'EdTech', 'RAG'],
+    href: 'https://bloomed.study',
   },
   {
-    name: 'termfolio',
-    description: 'This very site — a vim-navigable portfolio shell inspired by code editors.',
-    tags: ['React', 'UX'],
-    href: 'https://github.com/ghifariarsa',
+    name: 'soap',
+    description: 'The Simple Organisation App — a lightweight organisation tool written in Python.',
+    tags: ['Python'],
+    href: 'https://github.com/ghifariarsa/soap',
   },
   {
-    name: 'queue-lite',
-    description: 'Minimal job queue for Node with Redis, built for side projects that outgrew cron.',
-    tags: ['Node.js', 'Redis'],
-    href: 'https://github.com/ghifariarsa',
+    name: 'assistx-copilot',
+    description: 'File management system that simplifies RAG workflows for end users — Python backend, Next.js frontend.',
+    tags: ['Python', 'Next.js', 'RAG'],
+    href: 'https://github.com/GhifariArsa',
   },
   {
-    name: 'pg-snapshot',
-    description: 'CLI that snapshots and restores Postgres schemas during local development.',
-    tags: ['Python', 'Postgres'],
-    href: 'https://github.com/ghifariarsa',
+    name: 'medical-rag-service',
+    description: 'Modular, API-based RAG service with hybrid search, reranking, and knowledge-graph grounding, adopted across a medical AI lab.',
+    tags: ['Python', 'LlamaIndex', 'Neo4j'],
+    href: 'https://github.com/GhifariArsa',
   },
 ];
 
@@ -157,61 +210,7 @@ export interface Post {
   paragraphs: string[];
 }
 
-export const POSTS: Post[] = [
-  {
-    slug: 'hello-world',
-    title: 'Hello, world (again)',
-    date: '2026-06-02',
-    readTime: '3 min',
-    paragraphs: [
-      'Every developer has rewritten their personal site a dozen times. This is my latest attempt, and honestly, probably not the last.',
-      "This time the theme is simple: make it feel like the place I already spend most of my day — a terminal and a code editor. So that's what you're looking at.",
-      'More posts coming whenever I have something worth writing down. No promises on a schedule.',
-    ],
-  },
-  {
-    slug: 'vim-motions-everywhere',
-    title: 'Why I put vim motions on my portfolio',
-    date: '2026-05-14',
-    readTime: '5 min',
-    paragraphs: [
-      'I spend so much time in modal editing that reaching for a mouse on my own website felt wrong.',
-      "So j/k moves the cursor, Enter opens whatever's highlighted, gg and G jump to the top and bottom, and / filters the blog list. It's a small thing, but it's mine.",
-      "If you've never used vim, arrow keys and clicking still work fine everywhere.",
-    ],
-  },
-  {
-    slug: 'debugging-at-2am',
-    title: 'Notes from debugging at 2am',
-    date: '2026-04-27',
-    readTime: '4 min',
-    paragraphs: [
-      'The bug only reproduced in production, only under load, and only on Tuesdays. Or so it felt at the time.',
-      'The actual fix was three lines. The four hours before it were mostly me staring at logs and questioning my life choices.',
-      'Lesson, as always: add better logging before you need it, not after.',
-    ],
-  },
-  {
-    slug: 'small-tools-big-wins',
-    title: 'Small tools, big wins',
-    date: '2026-03-19',
-    readTime: '6 min',
-    paragraphs: [
-      "The highest-leverage thing I built last year wasn't a feature — it was a fifty-line script that saved everyone on the team ten minutes a day.",
-      "Nobody puts 'wrote a small CLI' on their highlight reel, but the team notices.",
-    ],
-  },
-  {
-    slug: 'on-taking-breaks',
-    title: 'On taking breaks from side projects',
-    date: '2026-02-08',
-    readTime: '2 min',
-    paragraphs: [
-      "Side projects don't have deadlines. That's the whole point of them, and also the reason they're easy to abandon.",
-      "I've made peace with letting things sit for months and picking them back up later. The code is always still there.",
-    ],
-  },
-];
+export const POSTS: Post[] = [];
 
-export const getPost = (slug: string): Post =>
-  POSTS.find((p) => p.slug === slug) ?? POSTS[0];
+export const getPost = (slug: string): Post | undefined =>
+  POSTS.find((p) => p.slug === slug);
