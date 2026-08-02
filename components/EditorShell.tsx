@@ -284,7 +284,7 @@ export default function EditorShell({ children }: { children: ReactNode }) {
             />
           )}
 
-          {/* sidebar — static column on desktop, slide-in drawer on mobile */}
+          {/* sidebar: static column on desktop, slide-in drawer on mobile */}
           <div
             style={{
               width: 230,

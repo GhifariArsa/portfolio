@@ -1,4 +1,4 @@
-// Atom One Dark palette — single source of truth for all colors.
+// Atom One Dark palette: single source of truth for all colors.
 export const c = {
   bg: '#282c34', // main background
   chrome: '#21252b', // titlebar / tabbar / sidebar

@@ -50,17 +50,16 @@ export default function HomePage() {
         I&apos;m an AI engineer and researcher pursuing a Master&apos;s in{" "}
         <span style={{ color: c.green }}>Artificial Intelligence</span> at{" "}
         <span style={{ color: c.green }}>Monash</span> (research pathway), after
-        a CS degree at RMIT. I build{" "}
-        <span style={{ color: c.green }}>RAG</span> and{" "}
-        <span style={{ color: c.green }}>LLM</span> systems, from medical AI
+        a CS degree at RMIT. I build <span style={{ color: c.green }}>RAG</span>{" "}
+        and <span style={{ color: c.green }}>LLM</span> systems, from medical AI
         platforms to self-hosted inference, and I like fast interfaces and
         developer tooling that make everyday work a little less tedious. This
         site is navigable with vim motions:{" "}
         <span style={{ color: c.blue }}>j</span> /{" "}
         <span style={{ color: c.blue }}>k</span> to move,{" "}
         <span style={{ color: c.blue }}>Ctrl-l</span> /{" "}
-        <span style={{ color: c.blue }}>Ctrl-h</span> to hop between the tree and
-        the editor, <span style={{ color: c.blue }}>Shift-L</span> /{" "}
+        <span style={{ color: c.blue }}>Ctrl-h</span> to hop between the tree
+        and the editor, <span style={{ color: c.blue }}>Shift-L</span> /{" "}
         <span style={{ color: c.blue }}>Shift-H</span> to switch tabs, and{" "}
         <span style={{ color: c.blue }}>Enter</span> to open.
       </p>
@@ -87,9 +86,7 @@ export default function HomePage() {
               <span style={{ fontSize: 15, color: c.blue, fontWeight: 700 }}>
                 {edu.school}
               </span>
-              <span
-                style={{ fontSize: 12.5, color: c.muted, flexShrink: 0 }}
-              >
+              <span style={{ fontSize: 12.5, color: c.muted, flexShrink: 0 }}>
                 {edu.dates}
               </span>
             </div>

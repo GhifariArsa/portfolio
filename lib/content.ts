@@ -100,7 +100,7 @@ export interface ContactRow {
 export const CONTACT: ContactRow[] = [
   { cmd: 'open', label: 'github.com/GhifariArsa', href: 'https://github.com/GhifariArsa', external: true },
   { cmd: 'mail', label: 'ghifariarsa1403@gmail.com', href: 'mailto:ghifariarsa1403@gmail.com' },
-  { cmd: 'echo', label: 'Melbourne, VIC — Australia', href: '#contact' },
+  { cmd: 'echo', label: 'Melbourne, VIC, Australia', href: '#contact' },
   { cmd: 'wget', label: 'Ghifari-Arsa-Ranandya-CV.pdf', href: '/Ghifari-Arsa-Ranandya-CV.pdf', download: true },
 ];
 
@@ -117,17 +117,17 @@ export const JOBS: Job[] = [
   {
     role: 'AI Engineer / Researcher',
     company: 'Cao Lab for Medical AGI/ASI',
-    dates: 'Feb 2026 — Present',
+    dates: 'Feb 2026 - Present',
     bullets: [
       'Architected and built a modular, API-based Retrieval-Augmented Generation (RAG) service adopted across multiple research and product initiatives within the lab.',
-      'Evaluated and benchmarked RAG strategies — retrieval pipelines, chunking, embedding models, reranking, and hybrid search — to optimise factual accuracy, latency, and domain grounding.',
+      'Evaluated and benchmarked RAG strategies (retrieval pipelines, chunking, embedding models, reranking, and hybrid search) to optimise factual accuracy, latency, and domain grounding.',
       'Designed an AI-powered learning platform for Monash postgraduate medical students, using knowledge graphs and RAG to accelerate mastery and personalised study.',
     ],
   },
   {
     role: 'AI Engineer / Team Lead',
     company: 'Monash Deep Neuron',
-    dates: 'Sep 2025 — Present',
+    dates: 'Sep 2025 - Present',
     bullets: [
       'Developing a reinforcement learning agent for autonomous laparoscopic surgery (appendix and gallbladder removal), expanding toward other procedures and robotic systems.',
       'Deploying and serving self-hosted large language models with vLLM for efficient inference and experimentation.',
@@ -137,9 +137,9 @@ export const JOBS: Job[] = [
   {
     role: 'Full-Stack Developer',
     company: 'AssistX Enterprise',
-    dates: 'Dec 2024 — Nov 2025',
+    dates: 'Dec 2024 - Nov 2025',
     bullets: [
-      'Led development of AssistX Copilot, a file management system that simplifies RAG workflows for end users — Python backend for file processing and user management, Next.js frontend.',
+      'Led development of AssistX Copilot, a file management system that simplifies RAG workflows for end users: Python backend for file processing and user management, Next.js frontend.',
       'Built a Python queuing API with CuPy and FastAPI for GPU parallel processing, cutting file-processing wait times from 2–3 minutes to near zero.',
       'Delivered a custom AI workflow in 3 weeks for a provincial council, enabling natural-language querying of a large digital archive for non-technical users.',
     ],
@@ -147,7 +147,7 @@ export const JOBS: Job[] = [
   {
     role: 'Software Developer Intern',
     company: 'Reyts Fintech',
-    dates: 'Jun 2024 — Nov 2024',
+    dates: 'Jun 2024 - Nov 2024',
     bullets: [
       'Revamped the entire admin dashboard for a P2P currency-exchange platform using Vue.js, focusing on usability and functionality.',
       'Collaborated with the team to keep the codebase high-quality and maintainable; founders praised the improved dashboard.',
@@ -156,7 +156,7 @@ export const JOBS: Job[] = [
   {
     role: 'Software Developer Intern',
     company: 'PT Kreasi Sentra Solusindo',
-    dates: 'Jul 2021 — Dec 2021',
+    dates: 'Jul 2021 - Dec 2021',
     bullets: [
       'Implemented a fully automated invoicing system for factory operations, eliminating manual invoicing and improving speed and accuracy.',
       'Designed financial reports with Jaspersoft Studio and wrote an algorithm to convert numeric values into Indonesian words for invoicing.',
@@ -171,31 +171,53 @@ export interface Project {
   description: string;
   tags: string[];
   href: string;
+  /** Optional preview image/gif shown at the top of the project card. */
+  media?: string;
+  /** Alt text for the preview media. */
+  mediaAlt?: string;
+  /** Show a live GitHub star count (derived from `href`) on the card. */
+  stars?: boolean;
 }
 
 export const PROJECTS: Project[] = [
+  {
+    name: 'clarity',
+    description: 'Modular, API-based RAG service with hybrid search, reranking, and inline references, built for medical guidelines. Message-queued document ingestion with document versioning.',
+    tags: ['Python', 'pgvector', 'Redis'],
+    href: 'https://github.com/GhifariArsa',
+    media: '/media/clarity.png',
+    mediaAlt: 'clarity RAG answer with cited clinical guideline sources',
+  },
+  {
+    name: 'soap',
+    description: 'The Simple Organisation App, a lightweight organisation tool written in Python.',
+    tags: ['Python'],
+    href: 'https://github.com/ghifariarsa/soap',
+    media: '/media/soap-demo.gif',
+    mediaAlt: 'soap app demo',
+    stars: true,
+  },
+  {
+    name: 'rem',
+    description:
+      'JacHacks finalist (built in 24h at Founders, Inc., SF). Turns a nursing-home shift handoff into a memory-consolidation event: ingests notes, labs, wearables, and the spoken handoff into a provenance-linked belief graph, emits an SBAR-plus report, and places a live phone call to the on-duty nurse when a deterministic rule fires.',
+    tags: ['Jac', 'Jaseci', 'LLM', 'Healthcare'],
+    href: 'https://github.com/peytonli/rem',
+    media: '/media/rem.png',
+    mediaAlt: 'rem provenance-linked belief graph for a resident handoff',
+  },
   {
     name: 'bloomed',
     description: 'Adaptive learning tool for medical students that pinpoints where their diagnostic reasoning went wrong and helps them study faster.',
     tags: ['AI', 'EdTech', 'RAG'],
     href: 'https://bloomed.study',
-  },
-  {
-    name: 'soap',
-    description: 'The Simple Organisation App — a lightweight organisation tool written in Python.',
-    tags: ['Python'],
-    href: 'https://github.com/ghifariarsa/soap',
+    media: '/media/bloomed.png',
+    mediaAlt: 'bloomed knowledge graph of medical topics',
   },
   {
     name: 'assistx-copilot',
-    description: 'File management system that simplifies RAG workflows for end users — Python backend, Next.js frontend.',
+    description: 'File management system that simplifies RAG workflows for end users: Python backend, Next.js frontend.',
     tags: ['Python', 'Next.js', 'RAG'],
-    href: 'https://github.com/GhifariArsa',
-  },
-  {
-    name: 'medical-rag-service',
-    description: 'Modular, API-based RAG service with hybrid search, reranking, and knowledge-graph grounding, adopted across a medical AI lab.',
-    tags: ['Python', 'LlamaIndex', 'Neo4j'],
     href: 'https://github.com/GhifariArsa',
   },
 ];

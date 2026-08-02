@@ -25,7 +25,7 @@ export default function BlogPage() {
         </div>
         <div>
           <span style={{ color: c.green }}>#</span> I&apos;m working on the first
-          posts — check back later.
+          posts. Check back later.
         </div>
       </div>
     </Content>
