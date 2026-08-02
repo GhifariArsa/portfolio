@@ -58,6 +58,8 @@ export default function EditorShell({ children }: { children: ReactNode }) {
   const [contentCount, setContentCount] = useState(0);
   const [mode, setMode] = useState<Mode>('NORMAL');
   const [clockText, setClockText] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
 
   const sidebarRefs = useRef<(HTMLElement | null)[]>([]);
   const contentRefs = useRef<Record<number, HTMLElement | null>>({});
@@ -73,8 +75,18 @@ export default function EditorShell({ children }: { children: ReactNode }) {
     setTreeIndex(defaultFocusForPath(pathname));
     setEditorIndex(0);
     setMode('NORMAL');
+    setNavOpen(false); // close the mobile drawer after navigating
     contentRefs.current = {};
   }, [pathname]);
+
+  // Track the mobile breakpoint so the sidebar can become a slide-in drawer.
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
 
   // Live clock (refresh every 15s), rendered client-side to avoid hydration drift.
   useEffect(() => {
@@ -210,7 +222,32 @@ export default function EditorShell({ children }: { children: ReactNode }) {
           <div style={{ flex: 1, textAlign: 'center', fontSize: 13, color: c.muted }}>
             ghifari@portfolio: ~/site
           </div>
-          <div style={{ width: 52 }} />
+          {isMobile ? (
+            <button
+              type="button"
+              aria-label={navOpen ? 'Close file tree' : 'Open file tree'}
+              aria-expanded={navOpen}
+              onClick={() => setNavOpen((o) => !o)}
+              style={{
+                width: 52,
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                color: navOpen ? c.blue : c.muted,
+                fontSize: 18,
+                lineHeight: 1,
+                padding: '0 2px',
+              }}
+            >
+              {navOpen ? '✕' : '☰'}
+            </button>
+          ) : (
+            <div style={{ width: 52 }} />
+          )}
         </div>
 
         {/* tab bar */}
@@ -233,8 +270,21 @@ export default function EditorShell({ children }: { children: ReactNode }) {
         </div>
 
         {/* body */}
-        <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-          {/* sidebar */}
+        <div style={{ flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' }}>
+          {/* backdrop (mobile drawer only) */}
+          {isMobile && navOpen && (
+            <div
+              onClick={() => setNavOpen(false)}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'rgba(0,0,0,0.5)',
+                zIndex: 20,
+              }}
+            />
+          )}
+
+          {/* sidebar — static column on desktop, slide-in drawer on mobile */}
           <div
             style={{
               width: 230,
@@ -244,6 +294,19 @@ export default function EditorShell({ children }: { children: ReactNode }) {
               padding: '14px 0',
               overflowY: 'auto',
               fontSize: 13.5,
+              ...(isMobile
+                ? {
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    zIndex: 21,
+                    maxWidth: '80vw',
+                    transform: navOpen ? 'translateX(0)' : 'translateX(-100%)',
+                    transition: 'transform 0.2s ease',
+                    boxShadow: navOpen ? '2px 0 12px rgba(0,0,0,0.4)' : 'none',
+                  }
+                : null),
             }}
           >
             <div
@@ -262,6 +325,7 @@ export default function EditorShell({ children }: { children: ReactNode }) {
                 key={item.label}
                 item={item}
                 focused={pane === 'tree' && i === treeIndex}
+                onNavigate={() => setNavOpen(false)}
                 refCb={(el) => {
                   sidebarRefs.current[i] = el;
                 }}
@@ -270,7 +334,7 @@ export default function EditorShell({ children }: { children: ReactNode }) {
           </div>
 
           {/* main content */}
-          <div style={{ flex: 1, overflowY: 'auto' }}>{children}</div>
+          <div style={{ flex: 1, overflowY: 'auto', minWidth: 0 }}>{children}</div>
         </div>
 
         {/* status bar */}
@@ -293,13 +357,17 @@ export default function EditorShell({ children }: { children: ReactNode }) {
           <StatusChip bg={c.inset} fg={c.muted}>
             {statusFile(pathname)}
           </StatusChip>
-          <StatusChip bg={c.bg} fg={pane === 'editor' ? c.blue : c.muted}>
-            {pane === 'editor' ? '◧ editor' : '◧ tree'}
-          </StatusChip>
+          {!isMobile && (
+            <StatusChip bg={c.bg} fg={pane === 'editor' ? c.blue : c.muted}>
+              {pane === 'editor' ? '◧ editor' : '◧ tree'}
+            </StatusChip>
+          )}
           <div style={{ flex: 1, background: c.bg }} />
-          <StatusChip bg={c.inset} fg={c.muted}>
-            UTF-8
-          </StatusChip>
+          {!isMobile && (
+            <StatusChip bg={c.inset} fg={c.muted}>
+              UTF-8
+            </StatusChip>
+          )}
           <StatusChip bg={c.chip} fg={c.text} pad={14}>
             {clockText}
           </StatusChip>
@@ -339,10 +407,12 @@ function SidebarLink({
   item,
   focused,
   refCb,
+  onNavigate,
 }: {
   item: (typeof SIDEBAR)[number];
   focused: boolean;
   refCb: (el: HTMLElement | null) => void;
+  onNavigate?: () => void;
 }) {
   const style: CSSProperties = {
     display: 'flex',
@@ -368,6 +438,7 @@ function SidebarLink({
         download={item.download}
         target={item.external ? '_blank' : undefined}
         rel={item.external ? 'noreferrer' : undefined}
+        onClick={onNavigate}
         style={style}
       >
         {glyph}
@@ -376,7 +447,7 @@ function SidebarLink({
     );
   }
   return (
-    <Link ref={refCb} href={item.href} style={style}>
+    <Link ref={refCb} href={item.href} onClick={onNavigate} style={style}>
       {glyph}
       {item.label}
     </Link>
