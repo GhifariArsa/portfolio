@@ -2,11 +2,11 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { c } from '@/lib/theme';
-import { POSTS, getPost } from '@/lib/content';
+import { getAllPosts, getPost } from '@/lib/posts';
 import { Content } from '@/components/ui';
 
 export function generateStaticParams() {
-  return POSTS.map((p) => ({ slug: p.slug }));
+  return getAllPosts().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -52,11 +52,7 @@ export default async function BlogPostPage({
         {post.date} · {post.readTime} read
       </div>
 
-      {post.paragraphs.map((para, i) => (
-        <p key={i} style={{ fontSize: 15, color: c.body, lineHeight: 1.9, margin: '0 0 18px' }}>
-          {para}
-        </p>
-      ))}
+      <div className="post-body" dangerouslySetInnerHTML={{ __html: post.html }} />
     </Content>
   );
 }

@@ -222,17 +222,4 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-// ---- Blog -------------------------------------------------------------------
-
-export interface Post {
-  slug: string;
-  title: string;
-  date: string;
-  readTime: string;
-  paragraphs: string[];
-}
-
-export const POSTS: Post[] = [];
-
-export const getPost = (slug: string): Post | undefined =>
-  POSTS.find((p) => p.slug === slug);
+// Blog posts live as markdown files in content/blog/ and are read via lib/posts.ts.
