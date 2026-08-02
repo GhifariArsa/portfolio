@@ -47,7 +47,7 @@ export default function HomePage() {
           margin: "0 0 24px",
         }}
       >
-        I&apos;m an AI engineer and researcher pursuing a Master&apos;s in{" "}
+        I&apos;m a developer and AI researcher pursuing a Master&apos;s in{" "}
         <span style={{ color: c.green }}>Artificial Intelligence</span> at{" "}
         <span style={{ color: c.green }}>Monash</span> (research pathway), after
         a CS degree at RMIT. I build <span style={{ color: c.green }}>RAG</span>{" "}
@@ -135,11 +135,6 @@ export default function HomePage() {
         {CONTACT.map((row, i) => (
           <ContactLink key={row.label} row={row} index={i} />
         ))}
-      </div>
-
-      <div style={heading}>## Resume</div>
-      <div style={{ color: c.muted, fontSize: 13, marginBottom: 6 }}>
-        // press Enter on the line below to download
       </div>
     </GutteredPage>
   );
