@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { c } from '@/lib/theme';
 import { getAllPosts, getPost } from '@/lib/posts';
+import { SITE } from '@/lib/site';
 import { Content } from '@/components/ui';
 
 export function generateStaticParams() {
@@ -16,7 +17,27 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
-  return { title: post ? `${post.title} · Ghifari Arsa Ranandya` : 'Not found' };
+  if (!post) return { title: 'Not found' };
+
+  const url = `/blog/${post.slug}`;
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      url,
+      title: post.title,
+      description: post.description,
+      publishedTime: post.rawDate,
+      authors: [SITE.name],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+    },
+  };
 }
 
 export default async function BlogPostPage({
@@ -29,8 +50,25 @@ export default async function BlogPostPage({
 
   if (!post) notFound();
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.rawDate,
+    dateModified: post.rawDate,
+    url: `${SITE.url}/blog/${post.slug}`,
+    mainEntityOfPage: `${SITE.url}/blog/${post.slug}`,
+    author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  };
+
   return (
     <Content maxWidth={700}>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Link
         href="/blog"
         style={{

@@ -24,6 +24,7 @@ export interface PostMeta {
   date: string; // formatted for display, e.g. "Aug 1, 2026"
   rawDate: string; // ISO-ish, used only for sorting
   readTime: string;
+  description: string; // frontmatter `description`, else derived from the body
 }
 
 export interface PostFull extends PostMeta {
@@ -52,6 +53,24 @@ function readTimeFromText(text: string): string {
   return `${Math.max(1, Math.round(words / 200))} min`;
 }
 
+// A short plain-text summary for meta descriptions / social cards: the
+// frontmatter `description` if present, else the first prose paragraph of the
+// body with markdown syntax stripped, trimmed to ~160 chars.
+function excerpt(data: Record<string, unknown>, content: string): string {
+  if (data.description) return String(data.description);
+  const firstPara =
+    content
+      .split(/\n\s*\n/)
+      .map((p) => p.trim())
+      .find((p) => p && !p.startsWith('#') && !p.startsWith('```')) ?? '';
+  const plain = firstPara
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1') // links / images -> text
+    .replace(/[*_`>#]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return plain.length > 160 ? `${plain.slice(0, 157).trimEnd()}…` : plain;
+}
+
 function listFiles(): string[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
   return fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.md'));
@@ -68,6 +87,7 @@ function readMeta(file: string): PostMeta {
     date: display,
     rawDate,
     readTime: data.readTime ? String(data.readTime) : readTimeFromText(content),
+    description: excerpt(data, content),
   };
 }
 
@@ -91,6 +111,7 @@ export function getPost(slug: string): PostFull | null {
     date: display,
     rawDate,
     readTime: data.readTime ? String(data.readTime) : readTimeFromText(content),
+    description: excerpt(data, content),
     html: marked.parse(content, { async: false }) as string,
   };
 }
