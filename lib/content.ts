@@ -200,6 +200,15 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    name: "bloomed",
+    description:
+      "Adaptive learning tool for medical students that pinpoints where their diagnostic reasoning went wrong and helps them study faster.",
+    tags: ["AI", "EdTech", "RAG"],
+    href: "https://bloomed.study",
+    media: "/media/bloomed.png",
+    mediaAlt: "bloomed knowledge graph of medical topics",
+  },
+  {
     name: "clarity",
     description:
       "Modular, API-based RAG service with hybrid search, reranking, and inline references, built for medical guidelines. Message-queued document ingestion with document versioning.",
@@ -226,15 +235,6 @@ export const PROJECTS: Project[] = [
     href: "https://github.com/peytonli/rem",
     media: "/media/rem.png",
     mediaAlt: "rem provenance-linked belief graph for a resident handoff",
-  },
-  {
-    name: "bloomed",
-    description:
-      "Adaptive learning tool for medical students that pinpoints where their diagnostic reasoning went wrong and helps them study faster.",
-    tags: ["AI", "EdTech", "RAG"],
-    href: "https://bloomed.study",
-    media: "/media/bloomed.png",
-    mediaAlt: "bloomed knowledge graph of medical topics",
   },
 ];
 
